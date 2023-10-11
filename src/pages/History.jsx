@@ -1,8 +1,15 @@
 import React from 'react'
+import NavBar from '../component/NavBar'
+import ListHistory from '../component/ListHistory'
+
+
+
 
 function History() {
   return (
-    <div>History</div>
+    <div>
+     
+    </div>
   )
 }
 

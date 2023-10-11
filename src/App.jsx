@@ -1,8 +1,6 @@
-import Route from "./router/Route"
-
+import Route from "./router/Route";
 
 function App() {
-  return <Route/>
-
+  return <Route />;
 }
-export default App
+export default App;
