@@ -4,7 +4,7 @@ import { CgMenuRound } from "react-icons/cg";
 import { FaUser, FaHistory } from "react-icons/fa";
 import {Link} from 'react-router-dom'
 
-function NavBar() {
+function SideBar() {
   return (
   
       <div className="flex flex-col w-96 border-r-2 h-[calc(100vh-80px)] mt-24 fixed">
@@ -13,9 +13,9 @@ function NavBar() {
 
 
           {/* Menu */}
-          <idv className="flex flex-col items-center">
+          <div className="flex flex-col items-center mt-8">
 
-            <div className="flex items-center justify-center border-b-2  w-full">
+            <div className="flex items-center justify-center border-b-2  w-full mb-4">
               <Link to="/menu" className="flex item-center justify-center cursor-pointer">
                 <div className="flex justify-center items-center">
                   <CgMenuRound />
@@ -27,10 +27,11 @@ function NavBar() {
 
             {/* user */}
             
-              <div className="flex item-center justify-center border-b-2 w-full">
+              <div className="flex item-center justify-center border-b-2 w-full mb-4">
                 <Link to="/user" className="flex items-center justify-center cursor-pointer">
                     <div className="flex justify-center items-center">
                     <FaUser />
+                    
                     </div>
                     <p>User</p>
                 </Link>
@@ -38,7 +39,7 @@ function NavBar() {
             
             
             {/* History */}
-            <div className="flex item-center justify-center border-b-2 w-full">
+            <div className="flex item-center justify-center border-b-2 w-full mb-4">
                 <Link to="/history" className="flex items-center justify-center cursor-pointer">
                     <div className="flex justify-center items-center">
                     <FaHistory />
@@ -46,7 +47,7 @@ function NavBar() {
                     <p>History</p>
                 </Link>
               </div>
-          </idv>
+          </div>
           
 
 
@@ -61,4 +62,4 @@ function NavBar() {
   );
 }
 
-export default NavBar;
+export default SideBar;

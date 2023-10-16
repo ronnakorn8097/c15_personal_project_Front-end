@@ -31,7 +31,6 @@ function Login() {
         <div className=" mx-60">
           <div className="space-y-4 py-10">
             <LoginForm />
-            <LoginButton />
           </div>
         </div>
       </div>

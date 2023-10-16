@@ -9,12 +9,6 @@ export default function MenuPage(){
         <div className="w-full overflow-auto">
           <div className="mx-32 mt-9 mb-9">
   
-          {/* <div className="flex justify-between ">
-            <div className="text-4xl font-bold">Menu</div>
-            <button type="button" className="flex px-5 py-1.5 text-sm font-medium
-             text-white bg-blue-700 rounded-md 
-             justify-center items-center">Create</button>
-            </div> */}
 
             <HeadBar text="Menu" buttonName="Create"/>
   

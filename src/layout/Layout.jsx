@@ -1,17 +1,15 @@
 import React from "react";
 import Header from "./Header";
 import { Outlet } from "react-router-dom";
-import NavBar from "../component/NavBar";
+import SideBar from '../component/SideBar'
 
 function Layout() {
   return (
     <>
       <Header />
-      
       <div className="flex">
-        <NavBar />
-
-        <div className="mt-28 ml-96 mx-auto">
+       <SideBar/>
+        <div className="mt-20 ml-96 mx-auto">
           <Outlet />
         </div>
 

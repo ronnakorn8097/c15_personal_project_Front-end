@@ -1,8 +1,18 @@
 import React from 'react'
+import useAuth from '../../hooks/useAuth'
+import { removeAccessToken } from '../../../utils/local-storage'
 
-function Logout() {
+function Logout({children}) {
+
+   
+
+  const logout = ()=>{
+    removeAccessToken();
+    
+  }
+
   return (
-    <button>Logout</button>
+    <button onClick={logout}>Logout</button>
   )
 }
 
