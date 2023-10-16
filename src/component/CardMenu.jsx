@@ -7,7 +7,7 @@ function CardMenu() {
       <div className="grid grid-cols-2 basis-2/3">
         <div className="">
           <img
-            src="../../public/ali-jouyandeh-bodgc6H44FA-unsplash.jpg"
+            src="../../public/unsplash_6VhPY27jdps.png"
             alt="#"
             className="w-56 h-full p-4 "
           />

@@ -38,7 +38,7 @@ function LoginForm() {
       <div className="flex flex-col space-y-2">
         <label className="font-semibold">Password</label>
         <input
-          type="text"
+          type="password"
           placeholder="Enter password"
           className="input input-bordered rounded-md border w-full py-2 px-4"
           value={loginInput.password}

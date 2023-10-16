@@ -12,24 +12,25 @@ export const AuthContext = createContext();
 
 export default function AuthContextProvider({ children }) {
   const [authUser, setAuthUser] = useState(null);
+  const [initalLoading , setInitialLoading] = useState(true);
+
+
 
   useEffect(() => {
-    const fetch = async () => {
-      try {
         const token = getAccessToken();
         if (token) {
-          const fetchUser = await axios.get("/api/auths/me", token);
-          setAuthUser(fetchUser.data.user);
+            axios.get("/api/auths/me", token).then((res)=>{
+              setAuthUser(res.data.user)
+          }).finally(()=>setInitialLoading(false))
+        }else{
+            setInitialLoading(false)
         }
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    fetch();
+      
+  
   }, []);
 
 
-
+//////////////////////  login /////////////////////
   const login = async (credential) => {
     //loginInput
 
@@ -44,9 +45,17 @@ export default function AuthContextProvider({ children }) {
     }
   };
 
+  /////////////////////// logout /////////////////////
+const logout = async (credential) => {
+    removeAccessToken();
+    setAuthUser(null);
+}
+
   return (
-    <AuthContext.Provider value={{ login, authUser }}>
+    <AuthContext.Provider value={{ login, authUser,logout ,initalLoading}}>
       {children}
     </AuthContext.Provider>
   );
 }
+
+
