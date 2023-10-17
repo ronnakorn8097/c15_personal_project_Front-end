@@ -1,8 +1,25 @@
+import { useEffect } from "react";
 import HeadBar from "../component/HeadBar";
 import ListMenu from "../component/ListMenu";
+import axios from "../config/axios";
+import { useState } from "react";
 
 
 export default function MenuPage(){
+
+const [menuItem,setMenuItem] = useState([]);
+
+
+useEffect(()=>{
+    axios.get('/api/menus')
+    .then((res)=>setMenuItem(res.data.getAllMenu))
+    .catch((err)=>{
+      console.log(err)
+    })
+},[])
+
+// console.log(menuItem)
+
     return (
         <div className="flex">
         {/* <NavBar /> */}
@@ -22,14 +39,8 @@ export default function MenuPage(){
             
               </ul>
   
-              <ListMenu/>
-              <ListMenu/>
-              <ListMenu/>
-              <ListMenu/>
-              <ListMenu/>
-              <ListMenu/>
-              <ListMenu/>
-              <ListMenu/>
+             {menuItem.map(item=><ListMenu key={item.id} menu={item}/>)} 
+            
           
          
              

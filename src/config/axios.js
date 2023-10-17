@@ -9,8 +9,7 @@ axios.interceptors.request.use((config)=>{
 
     
     const token = getAccessToken();
-    if(token)
-    {
+    if(token){
         // console.log(config)
         config.headers.Authorization = `Bearer ${token}`
     }

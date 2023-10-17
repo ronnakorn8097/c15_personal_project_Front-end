@@ -9,7 +9,7 @@ function Layout() {
       <Header />
       <div className="flex">
        <SideBar/>
-        <div className="mt-20 ml-96 mx-auto">
+        <div className="mt-24 ml-[330px] mx-auto w-full">
           <Outlet />
         </div>
 

@@ -42,7 +42,7 @@ const  adminRouter = createBrowserRouter([
       // user
       { path: "user", element: <UserPage /> },
       { path: "user/addUser", element: <CreateUser /> },
-      { path: "user/:edituserId", element: <EditUser /> },
+      { path: "user/:editUserId", element: <EditUser /> },
       // history
       { path: "history", element: <History /> },
       // order
