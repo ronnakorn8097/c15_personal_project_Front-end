@@ -5,13 +5,15 @@ import { useParams } from "react-router-dom";
 import axios from "../config/axios";
 import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import Loading from "../component/Loading"
 
 function EditUser() {
   const { editUserId } = useParams();
 
   const navigate = useNavigate();
 
-  const { getMe, setInitialLoading } = useAuth();
+  const { getMe } = useAuth();
+  const [loading,setLoading] = useState(false)
 
   const [editUser, setEditUser] = useState({
     id: editUserId,
@@ -31,30 +33,38 @@ function EditUser() {
     });
   } catch (error) {
     console.log(error)
-  }finally {
-    setInitialLoading(false)
   }
   }, []);
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-
-    formData.append("id", editUser.id);
-    formData.append("username", editUser.username);
-    formData.append("firstName", editUser.firstName);
-    formData.append("lastName", editUser.lastName);
-    formData.append("status", editUser.status);
-    formData.append("userImage", editUser.userImage);
-    formData.append("role", editUser.role);
-
-    await axios.patch("/api/users/updateUser", formData);
-    await getMe();
-    navigate("/user");
+    try {
+      e.preventDefault();
+      const formData = new FormData();
+  
+      formData.append("id", editUser.id);
+      formData.append("username", editUser.username);
+      formData.append("firstName", editUser.firstName);
+      formData.append("lastName", editUser.lastName);
+      formData.append("status", editUser.status);
+      formData.append("userImage", editUser.userImage);
+      formData.append("role", editUser.role);
+  
+      await axios.patch("/api/users/updateUser", formData);
+      setLoading(true)
+      await getMe();
+      navigate("/user");
+      
+    } catch (error) {
+      console.log(error)
+    }finally{
+     setLoading(false)
+    }
+  
  
   };
 
   return (
+    <> {loading && <Loading/>}
     <form onSubmit={handleSubmit}>
       <div className="grid grid-cols-2 bg-amber-600">
         <div className="col-span-1">
@@ -160,7 +170,7 @@ function EditUser() {
         </div>
       </div>
     </form>
-  );
+    </>);
 }
 
 export default EditUser;
