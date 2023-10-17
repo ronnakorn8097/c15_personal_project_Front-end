@@ -19,27 +19,15 @@ function EditUser() {
     firstName: "",
     lastName: "",
     status: "",
-    userImage: null,
+    userImage: "",
     role: "",
   });
 
 
   useEffect(() => {
     try {
-      
-   
     axios.get(`/api/users/${editUserId}`).then((res) => {
-      const { username, firstName, lastName, status, userImage, role } =
-        res.data.getUserById;
-      setEditUser({
-        id: editUserId,
-        username,
-        firstName,
-        lastName,
-        status,
-        userImage,
-        role,
-      });
+      setEditUser(res.data.getUserById)
     });
   } catch (error) {
     console.log(error)
@@ -63,10 +51,7 @@ function EditUser() {
     await axios.patch("/api/users/updateUser", formData);
     await getMe();
     navigate("/user");
-    //  axios.get(`/api/users/${editUserId}`)
-    //  .then((res)=>{
-    //    setUser(res.data.getUserById)
-    //  })
+ 
   };
 
   return (
