@@ -9,7 +9,7 @@ import Loading from "../component/Loading"
 
 function EditUser() {
   const { editUserId } = useParams();
-console.log(editUserId)
+
   const navigate = useNavigate();
 
   const { getMe } = useAuth();

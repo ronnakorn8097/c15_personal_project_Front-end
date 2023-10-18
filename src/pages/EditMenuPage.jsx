@@ -36,19 +36,13 @@ function EditMenuPage() {
             setLoading(true)
             e.preventDefault();
             const formData = new FormData();
-            // formData.append("id",editMenu.id)
-            // formData.append("name",editMenu.name)
-            // formData.append("price",editMenu.price)
-            // formData.append("status",editMenu.status)
-            // formData.append("detail",editMenu.detail)
-            // formData.append("menuImage",editMenu.menuImage)
-
-            for (let key in editMenu) {
-              if (editMenu[key]) {
-                formData.append(`${key}`, editMenu[key]);
-              }
-            }
-
+            formData.append("id",editMenu.id)
+            formData.append("name",editMenu.name)
+            formData.append("price",editMenu.price)
+            formData.append("status",editMenu.status)
+            formData.append("detail",editMenu.detail)
+            formData.append("menuImage",editMenu.menuImage)
+            
             await axios.patch("/api/menus/updateMenu",formData)
             navigate("/menu")
         } catch (error) {

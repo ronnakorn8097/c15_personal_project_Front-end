@@ -11,17 +11,17 @@ function SideBar() {
   // console.log(authUser)
 
   return (
-    <div className="flex flex-col w-80 border-r-2 h-[calc(100vh-80px)] mt-24 fixed">
+    <div className="flex flex-col w-80 border-r-2 border-gray-600 h-[calc(100vh-80px)] mt-20 fixed">
       <Avatar src={authUser.userImage} />
       <div className="flex flex-col justify-between h-[calc(100%-320px)]">
 
 
-        <div className="flex flex-col items-center mt-8">
+        <div className="flex flex-col items-center mt-8 space-y-3">
 
 
           {authUser.role === "ADMIN" && (
             <>
-              <div className="flex items-center justify-center border-b-2  w-full mb-4">
+              <div className="flex items-center justify-center border-b-2 border-gray-600  w-full ">
                 <Link
                   to="/menu"
                   className="flex item-center justify-center cursor-pointer gap-2"
@@ -33,7 +33,7 @@ function SideBar() {
                 </Link>
               </div>
 
-              <div className="flex item-center justify-center border-b-2 w-full mb-4">
+              <div className="flex item-center justify-center border-b-2  border-gray-600 w-full ">
                 <Link
                   to="/user"
                   className="flex items-center justify-center cursor-pointer gap-2"
@@ -49,7 +49,7 @@ function SideBar() {
 
 
 
-          <div className="flex item-center justify-center border-b-2 w-full mb-4">
+          <div className="flex item-center justify-center border-b-2 border-gray-600 w-full mb-4">
             <Link
               to="/history"
               className="flex items-center justify-center cursor-pointer gap-2"
@@ -62,7 +62,7 @@ function SideBar() {
           </div>
 
             {authUser.role ==="STAFF" &&
-          <div className="flex item-center justify-center border-b-2 w-full mb-4">
+          <div className="flex item-center justify-center border-b-2 border-gray-600  w-full mb-4">
             <Link
               to="/order"
               className="flex items-center justify-center cursor-pointer gap-2"

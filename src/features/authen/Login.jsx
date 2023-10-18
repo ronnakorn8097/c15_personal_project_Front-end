@@ -22,8 +22,8 @@ function Login() {
       <div className="">
         <div className="flex flex-row justify-center my-24 space-x-6">
           <PiCoffeeLight className="text-7xl " />
-          <h1 className="flex justify-center items-center text-7xl">
-            Smart POS
+          <h1 className="flex justify-center items-center text-6xl font-bold">
+            สามารถ POS
           </h1>
         </div>
 

@@ -7,18 +7,19 @@ import axios from "../config/axios"
 function OrderPage() {
 
   const [order,setOrder] = useState([]);
+  const [clickQty,setClickQty] = useState(0);
 
   useEffect(()=>{
     axios.get('/api/menus').then((res)=>{
       setOrder(res.data.getAllMenu)
     })
-  })
+  },[])
 
   return (
-    <div className="bg-blue-200 h-screen w-[calc(100vw-350px)]">
+    <div className="bg-red-100 h-screen w-[calc(100vw-350px)]">
       <div className="grid grid-cols-9">
-        <div className="col-span-6">
-          <div className=" p-14 text-2xl font-bold">Menu</div>
+        <div className="col-span-5">
+          <div className=" p-12 text-3xl font-bold">Menu</div>
 
           <div className="grid grid-cols-2 gap-3 ">
             <div className="flex flex-wrap col-span-2 justify-around m-4">
@@ -28,19 +29,31 @@ function OrderPage() {
             </div>
           </div>
         </div>
-        <div className="col-span-3 bg-red-200">
+        <div className="col-span-4 bg-gray-300">
 
 
-          <h1 className="text-4xl font-bold mb-8">Order No.</h1>
+          <h1 className="text-4xl font-bold mb-8 p-4">Order No.</h1>
 
-          <div className="bg-gray-200 flex gap-4 ml-2">
-            <p>Menu A</p>
-            <div className="text-xl font-semibold flex gap-4">
-              <button className="rounded-md bg-[#A39090] w-6">-</button>
-              <span>1</span>
-              <button className="rounded-md bg-[#A39090] w-6">+</button>           
+          <div className="flex gap-4 ml-2 justify-between px-8 text-2xl">
+            <div className="flex gap-2">
+            <div>
+            <p>Menu Item A</p>
             </div>
-            <div className="flex float-left">
+            <div className="text-xl font-semibold flex gap-4">
+              <button 
+              className=" bg-[#cac4c4] hover:bg-slate-400 w-6"
+              onClick={()=>setClickQty(clickQty-1)}
+              >-</button>
+
+              <span>{clickQty}</span>
+
+              <button 
+              className="bg-[#cac4c4] hover:bg-slate-400 w-6"
+              onClick={()=>setClickQty(clickQty+1)}
+              >+</button>           
+            </div>
+            </div>
+            <div className="flex float-left font-bold">
               70
             </div>
           </div>

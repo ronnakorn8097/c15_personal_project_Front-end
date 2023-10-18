@@ -1,4 +1,5 @@
 import React from "react";
+import defaultPicture from '../../public/defaultProfile.jpg'
 
 function CardMenu({order}) {
   return (
@@ -7,7 +8,7 @@ function CardMenu({order}) {
       <div className="grid grid-cols-2 basis-2/3">
         <div className="">
           <img
-            src="../../public/unsplash_6VhPY27jdps.png"
+            src={order.menuImage}
             alt="#"
             className="w-56 h-full p-4 "
           />
