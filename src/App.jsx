@@ -5,7 +5,7 @@ import Loading from "./component/Loading";
 
 function App() {
   const {initalLoading} = useAuth()
-  
+  // const initalLoading = true
 
   if(initalLoading)
 {

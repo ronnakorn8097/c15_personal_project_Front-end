@@ -1,7 +1,19 @@
 import React from "react";
 import CardMenu from "../component/CardMenu";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "../config/axios"
 
 function OrderPage() {
+
+  const [order,setOrder] = useState([]);
+
+  useEffect(()=>{
+    axios.get('/api/menus').then((res)=>{
+      setOrder(res.data.getAllMenu)
+    })
+  })
+
   return (
     <div className="bg-blue-200 h-screen w-[calc(100vw-350px)]">
       <div className="grid grid-cols-9">
@@ -10,10 +22,9 @@ function OrderPage() {
 
           <div className="grid grid-cols-2 gap-3 ">
             <div className="flex flex-wrap col-span-2 justify-around m-4">
-              <CardMenu />
-              <CardMenu />
-              <CardMenu />
-              <CardMenu />
+             {order.map(item=> <CardMenu key={item.id} order={item}/>) }
+             {/* <CardMenu order={order}/> */}
+             
             </div>
           </div>
         </div>

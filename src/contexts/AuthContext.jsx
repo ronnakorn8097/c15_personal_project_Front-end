@@ -49,6 +49,7 @@ export default function AuthContextProvider({ children }) {
 
     try {
       const res = await axios.post("/api/auths/login", credential);
+      
       // res = {accessToken , user}
       // console.log(res)
       if (res.data.accessToken) {

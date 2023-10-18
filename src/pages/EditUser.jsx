@@ -9,7 +9,7 @@ import Loading from "../component/Loading"
 
 function EditUser() {
   const { editUserId } = useParams();
-
+console.log(editUserId)
   const navigate = useNavigate();
 
   const { getMe } = useAuth();
@@ -23,6 +23,7 @@ function EditUser() {
     status: "",
     userImage: "",
     role: "",
+    password : ""
   });
 
 
@@ -38,9 +39,9 @@ function EditUser() {
 
   const handleSubmit = async (e) => {
     try {
+      setLoading(true)
       e.preventDefault();
       const formData = new FormData();
-  
       formData.append("id", editUser.id);
       formData.append("username", editUser.username);
       formData.append("firstName", editUser.firstName);
@@ -50,7 +51,7 @@ function EditUser() {
       formData.append("role", editUser.role);
   
       await axios.patch("/api/users/updateUser", formData);
-      setLoading(true)
+     
       await getMe();
       navigate("/user");
       
@@ -109,7 +110,7 @@ function EditUser() {
           <div>
             <label>password</label>
             <input
-              type="text"
+              type="password"
               className="rounded-md border-neutral-800 border p-1"
               placeholder="Password"
               value={editUser.password}
@@ -164,7 +165,7 @@ function EditUser() {
             />
           </div>
 
-          <button className="rounded-md border border-blue-700 bg-blue-600 text-white p-0.5">
+          <button type="submit" className="rounded-md border border-blue-700 bg-blue-600 text-white p-1">
             Complete
           </button>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-function CardMenu() {
+function CardMenu({order}) {
   return (
    
     <div className="bg-[#dbd7d7] w-80 h-72 flex flex-col mb-5">
@@ -13,12 +13,12 @@ function CardMenu() {
           />
         </div>
         <div className="pt-4 flex flex-col justify-between">
-          <p className="font-bold text-xl mb-2">Coffee</p>
+          <p className="font-bold text-xl mb-2">{order.name}</p>
           <p className="text-sm mb-2">
             {/* ห้ามเกิน20 ตัวอักษร */}
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos fugit aliquid reprehenderit alias at! Rerum similique magnam ad ea placeat.
+            {order.detail}
           </p>
-          <p className="mb-4 text-xm font-bold">Price 500 Baht</p>
+          <p className="mb-4 text-xm font-bold">Price {order.price} Baht</p>
         </div>
       </div>
       <div className="flex justify-center items-center basis-1/3">

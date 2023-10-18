@@ -1,5 +1,5 @@
 import React from 'react'
-import ButtonAction from './ButtonAction'
+import ButtonUser from './ButtonUser'
 
 
 //  map user with database
@@ -13,7 +13,7 @@ function ListUser({user}) {
         <div>{user.role}</div>
         <div>{user.status}</div>
 
-        <ButtonAction userId={user.id}/>
+        <ButtonUser userId={user.id}/>
 
       </div>
     </div>
