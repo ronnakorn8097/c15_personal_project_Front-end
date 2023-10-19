@@ -46,7 +46,7 @@ const  adminRouter = createBrowserRouter([
       // history
       { path: "history", element: <History /> },
       // order
-      {path:"*",element:<NotFound/>}
+      {path:"*",element:<MenuPage />}
     ],
   },
 ]);
@@ -71,12 +71,11 @@ const staffRouter = createBrowserRouter([
         </Authenticated>
       ),
       children:  [
-        // menu
-        // history
+        
         { path: "history", element: <History /> },
         // order
         { path: "order", element: <OrderPage /> },
-        {path:"*",element:<NotFound />}
+        {path:"*",element: <OrderPage />}
       ],
     },
   ]);

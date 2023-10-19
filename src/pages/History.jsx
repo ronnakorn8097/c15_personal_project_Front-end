@@ -17,7 +17,7 @@ function History() {
     })
   },[])
 
-
+// console.log(history.orderMenus)
   return (
     <div className="flex">
     {/* <NavBar /> */}
@@ -31,12 +31,14 @@ function History() {
     </div>
 
         <div className="w-full ">
-          <ul className="grid grid-cols-6 font-bold text-lg mt-8">
+          <ul className="grid grid-cols-7 font-bold text-lg mt-8">
             <li>Order No.</li>
             <li>Total Price</li>
             <li>Staff</li>
-            <li>Date</li>
+            {/* <li>Date</li> */}
+            <li>Item</li>
             <li>Payment</li>
+            <li>Status</li>
             <li>Action</li>
         
           </ul>

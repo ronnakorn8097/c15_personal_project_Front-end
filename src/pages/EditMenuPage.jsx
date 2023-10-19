@@ -56,11 +56,12 @@ function EditMenuPage() {
     <>
     {loading && <Loading/>}
       <form onSubmit={handleSubmit}>
+      
         <h1 className="text-3xl ml-3">Edit Menu</h1>
-        <div className="grid grid-cols-2">
+        <div className="flex p-4 bg-red-200 ml-4">
 
-          <div>
-            <div>
+          <div className="bg-blue-200 p-3">
+            <div className="flex flex-col">
               <label>Menu Name</label>
               <input type="text" 
               className="rounded-md border border-black" 
@@ -71,7 +72,7 @@ function EditMenuPage() {
             }
               />
             </div>
-            <div>
+            <div className="flex flex-col">
               <label htmlFor="menuDetail">Menu Detail</label>
               <textarea id="menuDetail" 
               name="menuDetail" 
@@ -102,7 +103,7 @@ function EditMenuPage() {
             </div>
           </div>
 
-          <div>
+          <div className="bg-yellow-200">
             <div>
             <label>Menu Price</label>
             <input type="text"
@@ -133,6 +134,7 @@ function EditMenuPage() {
           </button>
           </div>
         </div>
+       
       </form>
     </>
   );
