@@ -3,7 +3,7 @@ import ButtonUser from './ButtonUser'
 
 
 //  map user with database
-function ListUser({user}) {
+function ListUser({user ,setAllUsers,allUsers}) {
   return (
     <div>
       <div className="grid grid-cols-6 justify-between items-center mt-3 w-full ">
@@ -13,7 +13,7 @@ function ListUser({user}) {
         <div>{user.role}</div>
         <div>{user.status}</div>
 
-        <ButtonUser userId={user.id}/>
+        <ButtonUser userId={user.id} />
 
       </div>
     </div>

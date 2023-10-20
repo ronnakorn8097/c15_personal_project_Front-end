@@ -1,7 +1,7 @@
 import React from "react";
 import ButtonMenu from "./ButtonMenu";
 
-function ListMenu({menu}) {
+function ListMenu({menu,menuItem,setMenuItem}) {
 
   return (
     <div>
@@ -11,7 +11,7 @@ function ListMenu({menu}) {
         <div>{menu.status}</div>
         <div>{menu.detail}</div>
 
-      <ButtonMenu menuId={menu.id}/>
+      <ButtonMenu menuId={menu.id} menuItem={menuItem} setMenuItem={setMenuItem}/>
       </div>
     </div>
   );

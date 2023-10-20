@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 
 
-function ButtonUser({ userId }) {
+function ButtonUser({ userId}) {
 
   const handleClickDel = async (e)=>{
     try {
@@ -14,7 +14,7 @@ function ButtonUser({ userId }) {
     // ถ้าสำเร็จ
     if(res.data.message)
     {
-      console.log(res.data.message)
+     console.log(res.data.message)
     }
     } catch (error) {
       console.log(error)
@@ -46,3 +46,7 @@ function ButtonUser({ userId }) {
 }
 
 export default ButtonUser;
+
+ // let newAllUsers = [...allUsers]
+      // newAllUsers = newAllUsers.filter(el=> el.id !== userId)
+      // setAllUsers(newAllUsers)

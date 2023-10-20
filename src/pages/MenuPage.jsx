@@ -48,7 +48,7 @@ export default function MenuPage() {
             </ul>
 
             {menuItem.map((item) => (
-              <ListMenu key={item.id} menu={item} />
+              <ListMenu key={item.id} menu={item} menuItem={menuItem} setMenuItem={setMenuItem}/>
             ))}
           </div>
         </div>

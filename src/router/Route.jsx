@@ -13,7 +13,8 @@ import Layout from "../layout/Layout";
 import RedirectIFAuthen from "../features/authen/RedirectIFAuthen";
 import Authenticated from "../features/authen/Authenticated";
 import useAuth from "../hooks/useAuth";
-import NotFound from "../pages/NotFound";
+import OrderDetail from "../pages/OrderDetail";
+
 
 const  adminRouter = createBrowserRouter([
   //login page
@@ -42,10 +43,12 @@ const  adminRouter = createBrowserRouter([
       // user
       { path: "user", element: <UserPage /> },
       { path: "user/addUser", element: <CreateUser /> },
-      { path: "user/:editUserId", element: <EditUser /> },
+      { path: "user/:userId", element: <EditUser /> },
       // history
       { path: "history", element: <History /> },
-      // order
+      //detail
+      { path: "order/detail/:orderId", element: <OrderDetail /> },
+      // any
       {path:"*",element:<MenuPage />}
     ],
   },

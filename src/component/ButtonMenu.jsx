@@ -4,9 +4,10 @@ import axios from "../config/axios";
 import { useState } from "react";
 import Loading from "./Loading";
 
-function ButtonMenu({ menuId }) {
+function ButtonMenu({ menuId,menuItem,setMenuItem }) {
 
     const [loading,setLoading] = useState(false);
+
     ///// delete menu ///////
     const handleClickDel = async (e)=>{
         try {
@@ -15,7 +16,10 @@ function ButtonMenu({ menuId }) {
             const res = await axios.delete(`/api/menus/${menuId}`)
             if(res.data.message)
             {
-                console.log(res.data.message)
+                let newMenuItem = [...menuItem] 
+                // เมนูอันไหมที่อัพเดทการลบออกไปแล้ว
+               newMenuItem = newMenuItem.filter(el=> el.id !== menuId)
+               setMenuItem(newMenuItem)
             }
         } catch (error) {
             console.log(error)
