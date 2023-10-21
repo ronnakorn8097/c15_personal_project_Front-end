@@ -1,5 +1,5 @@
 import React from "react";
-import defaultPicture from '../../public/defaultProfile.jpg'
+
 
 function CardMenu({product,onClick, orderMenus}) {
 

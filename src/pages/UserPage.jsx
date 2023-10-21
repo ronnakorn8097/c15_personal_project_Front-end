@@ -18,7 +18,7 @@ export default function UserPage() {
       .catch((err) => {
         console.log(err);
       });
-  }, []);
+  },[]);
 
   return (
     <div className="flex">
@@ -50,7 +50,7 @@ export default function UserPage() {
             </ul>
 
             {allUsers.map((user) => (
-              <ListUser key={user.id} user={user} />
+              <ListUser key={user.id} user={user} setAllUsers={setAllUsers} allUsers={allUsers} />
             ))}
           </div>
         </div>

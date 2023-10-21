@@ -6,14 +6,15 @@ import ListHistory from "../component/ListHistory";
 
 function History() {
   const [history, setHistory] = useState([]);
+  
 
   useEffect(() => {
     axios.get("/api/history").then((res) => {
-      setHistory(res.data.getHistory);
+      setHistory(res.data.getHistoryWithOutVoid);
     });
   }, []);
 
-  // console.log(history)
+
   return (
     <div className="flex">
       {/* <NavBar /> */}
@@ -34,8 +35,8 @@ function History() {
               <li>Action</li>
             </ul>
 
-            {history.map((item, i) => (
-              <ListHistory key={item.id} history={item}/>
+            {history.map((item) => (
+              <ListHistory key={item.id} historyItem={item} history={history} setHistory={setHistory}/>
             ))}
           </div>
         </div>

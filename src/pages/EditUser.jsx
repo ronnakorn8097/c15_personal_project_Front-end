@@ -50,6 +50,7 @@ function EditUser() {
       formData.append("firstName", editUser.firstName);
       formData.append("lastName", editUser.lastName);
       formData.append("status", editUser.status);
+      formData.append("password",editUser.password)
       formData.append("userImage", editUser.userImage);
       formData.append("role", editUser.role);
 
@@ -68,10 +69,11 @@ function EditUser() {
     <>
       {" "}
       {loading && <Loading />}
+      <h1 className="text-4xl font-bold ml-3">Edit User</h1>
       <form onSubmit={handleSubmit}>
-        <div className="grid grid-cols-2 bg-amber-600">
-          <div className="col-span-1">
-            <div>
+        <div className="flex flex-col w-[500px] p-8">
+          <div className="flex flex-col p-8">
+            <div className="flex flex-col mb-2">
               <label>username</label>
               <input
                 type="text"
@@ -83,7 +85,7 @@ function EditUser() {
                 }
               />
             </div>
-            <div>
+            <div className="flex flex-col mb-2">
               <label>FirstName</label>
               <input
                 type="text"
@@ -96,7 +98,7 @@ function EditUser() {
               />
             </div>
 
-            <div>
+            <div className="flex flex-col mb-2">
               <label>LastName</label>
               <input
                 type="text"
@@ -109,7 +111,7 @@ function EditUser() {
               />
             </div>
 
-            <div>
+            <div className="flex flex-col mb-2">
               <label>password</label>
               <input
                 type="password"
@@ -122,12 +124,12 @@ function EditUser() {
               />
             </div>
 
-            <div>
+            <div className="flex flex-col mb-2">
               <label>Status</label>
               <select
                 name="status"
                 id="status"
-                className="rounded-md border border-black"
+                className="rounded-md border border-black p-1"
                 value={editUser.status}
                 onChange={(e) =>
                   setEditUser({ ...editUser, status: e.target.value })
@@ -139,8 +141,8 @@ function EditUser() {
             </div>
           </div>
 
-          <div className="col-span-1">
-            <div>
+          <div className="flex flex-col p-8 mb-2">
+            <div className="mb-2">
               <label>Role</label>
               <select
                 name="role"
@@ -156,7 +158,7 @@ function EditUser() {
               </select>
             </div>
 
-            <div>
+            <div className="mb-2">
               <label>User Image</label>
               <input
                 type="file"
@@ -169,7 +171,7 @@ function EditUser() {
 
             <button
               type="submit"
-              className="rounded-md border border-blue-700 bg-blue-600 text-white p-1"
+              className="rounded-md border border-blue-700 bg-blue-600 text-white p-1 mt-8 w-[256px]"
             >
               Complete
             </button>

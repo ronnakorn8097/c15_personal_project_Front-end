@@ -11,10 +11,10 @@ function Login() {
   // });
 
   return (
-    <div className=" grid grid-cols-2">
+    <div className="bg-zinc-200 grid grid-cols-2">
       <div className="">
         <img
-          src="../../public/unsplash_6VhPY27jdps.png"
+          src="../../public/LOGO.jpeg"
           alt="#"
           className="w-full h-screen "
         />

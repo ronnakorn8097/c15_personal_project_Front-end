@@ -16,72 +16,112 @@ function OrderPage() {
   const [products, setProducts] = useState([]);
 
   const [order, setOrder] = useState(defaultOrder);
-  const [viewOrder,setViewOrder] = useState([]);
+  const [viewOrder, setViewOrder] = useState([]);
   //
   const [totalPrice, setTotalPrice] = useState(0);
+  const [submitStatus, setSubmitStatus] = useState("STAND_BY")
 
   // console.log(order)
 
-  // plus , minus = e
-  const onClickAdd = (e, menuId) => {
-    const newOrderMenus = [...order.orderMenus]; // []
+  // // plus , minus = e
+  // const onClickAdd = (e, menuId) => {
+  //   const newOrderMenus = [...order.orderMenus]; // []
 
-    // ถ้ากดปุ่ม +
+  //   // ถ้ากดปุ่ม +
+  //   if (e.target.value === "plus") {
+  //     const targetOrder = newOrderMenus.find((el) => +el.menuId === +menuId);
+  //     // กดปุ่ม ADD ใต้ product
+  //     // console.log(targetOrder) // {amounts : '1',menuId: 1,name : 'order name'}
+  //     // console.log(newOrderMenus) // {amounts : '1',menuId: 1,name : 'order name'}
+  //     if (targetOrder) {
+  //       // เคยเจอเมนูนี้อยู่ใน order แล้วก็ให้ บวก1
+  //       const clonedTarget = {...targetOrder,amounts: +targetOrder.amounts + 1,};
+  //       // console.log(clonedTarget)
+  //       // {amounts : '1',menuId: 1,name : 'order name'} กดปุ่มบวก 1 รอบ
+  //       // {amounts : '2',menuId: 1,name : 'order name'} กดปุ่มบวก 2 รอบ
+  //       // {amounts : '3',menuId: 1,name : 'order name'} กดปุ่มบวก 3 รอบ
+  //       const filteredOrderMenus = newOrderMenus.filter(
+  //         (el) => el.menuId !== menuId
+  //       ); // ไม่เท่ากับข้อมูลเก่า
+  //       filteredOrderMenus.push(clonedTarget);
+  //       // console.log(filteredOrderMenus)
+  //       setOrder((prev) => ({ ...prev, orderMenus: filteredOrderMenus }));
+  //     } else {
+  //       // ยังไม่เคยถูกกดแอด
+  //       // หาเมนูที่จะเอาเข้า order
+  //       const targetProduct = products.find((el) => el.id === menuId);
+  //       // set ค่า order ที่จะ set ให้มัน
+  //       const newOrder = {
+  //         amounts: "1",
+  //         menuId: menuId,
+  //         name: targetProduct.name,
+  //         price: targetProduct.price,
+  //       };
+  //       newOrderMenus.push(newOrder);
+  //       // prev ค่าก่อนหน้านี้เหมือนเดิมยกเว้น orderMenus ให้รับ newOrderMenus เข้าไปแทน ที่ key orderMenus
+  //       setOrder((prev) => ({ ...prev, orderMenus: newOrderMenus }));
+  //     }
+  //   }
+  //   // ถ้ากดปุ่ม -
+  //   else {
+  //     const targetOrder = newOrderMenus.find((el) => +el.menuId === +menuId);
+  //     // console.log(targetOrder) //  {amounts : '1',menuId: 1,name : 'order name'} ข้อมูลของที่มีอยู่แล้วหลังกด add
+  //     if (targetOrder.amounts > 1) {
+  //       // ถ้ามี value
+  //       const clonedTarget = {...targetOrder,amounts: +targetOrder.amounts - 1,
+  //       };
+  //       const filteredOrderMenus = newOrderMenus.filter(
+  //         (el) => el.menuId !== menuId
+  //       ); // ไม่เท่ากับข้อมูลเก่า
+  //       filteredOrderMenus.push(clonedTarget);
+  //       setOrder((prev) => ({ ...prev, orderMenus: filteredOrderMenus }));
+  //     } else {
+  //       // ไม่เท่ากับเมนูที่ถูกเลือก
+  //       const removedOrderMenus = newOrderMenus.filter(
+  //         (el) => el.menuId !== menuId
+  //       );
+  //       setOrder((prev) => ({ ...prev, orderMenus: removedOrderMenus }));
+  //     }
+  //   }
+  // };
+
+  //// เมื่อ กดปุ่ม + //////
+  const onClickAdd = (e, menuId) => {
+    const newOrderMenus = [...order.orderMenus];
+
+    const targetOrderIndex = newOrderMenus.findIndex(
+      (el) => +el.menuId === +menuId
+    );
+    console.log(targetOrderIndex);
     if (e.target.value === "plus") {
-      const targetOrder = newOrderMenus.find((el) => +el.menuId === +menuId);
-      // กดปุ่ม ADD ใต้ product
-      // console.log(targetOrder) // {amounts : '1',menuId: 1,name : 'order name'}
-      // console.log(newOrderMenus) // {amounts : '1',menuId: 1,name : 'order name'}
-      if (targetOrder) { 
-        // เคยเจอเมนูนี้อยู่ใน order แล้วก็ให้ บวก1
-        const clonedTarget = {...targetOrder,amounts: +targetOrder.amounts + 1,};
-        // console.log(clonedTarget)
-        // {amounts : '1',menuId: 1,name : 'order name'} กดปุ่มบวก 1 รอบ
-        // {amounts : '2',menuId: 1,name : 'order name'} กดปุ่มบวก 2 รอบ
-        // {amounts : '3',menuId: 1,name : 'order name'} กดปุ่มบวก 3 รอบ
-        const filteredOrderMenus = newOrderMenus.filter(
-          (el) => el.menuId !== menuId
-        ); // ไม่เท่ากับข้อมูลเก่า
-        filteredOrderMenus.push(clonedTarget);
-        // console.log(filteredOrderMenus)
-        setOrder((prev) => ({ ...prev, orderMenus: filteredOrderMenus }));
+      if (targetOrderIndex !== -1) {
+        newOrderMenus[targetOrderIndex].amounts =
+          +newOrderMenus[targetOrderIndex].amounts + 1;
       } else {
-        // ยังไม่เคยถูกกดแอด
-        // หาเมนูที่จะเอาเข้า order
         const targetProduct = products.find((el) => el.id === menuId);
-        // set ค่า order ที่จะ set ให้มัน
-        const newOrder = {
-          amounts: "1",
-          menuId: menuId,
-          name: targetProduct.name,
-          price: targetProduct.price,
-        };
-        newOrderMenus.push(newOrder);
-        // prev ค่าก่อนหน้านี้เหมือนเดิมยกเว้น orderMenus ให้รับ newOrderMenus เข้าไปแทน ที่ key orderMenus
-        setOrder((prev) => ({ ...prev, orderMenus: newOrderMenus }));
+        if (targetProduct) {
+          const newOrder = {
+            amounts: "1",
+            menuId: menuId,
+            name: targetProduct.name,
+            price: targetProduct.price,
+          };
+          newOrderMenus.push(newOrder);
+        }
       }
-    }
-    // ถ้ากดปุ่ม -
-    else {
-      const targetOrder = newOrderMenus.find((el) => +el.menuId === +menuId);
-      // console.log(targetOrder) //  {amounts : '1',menuId: 1,name : 'order name'} ข้อมูลของที่มีอยู่แล้วหลังกด add
-      if (targetOrder.amounts > 1) {
-        // ถ้ามี value
-        const clonedTarget = {...targetOrder,amounts: +targetOrder.amounts - 1,
-        };
-        const filteredOrderMenus = newOrderMenus.filter(
-          (el) => el.menuId !== menuId
-        ); // ไม่เท่ากับข้อมูลเก่า
-        filteredOrderMenus.push(clonedTarget);
-        setOrder((prev) => ({ ...prev, orderMenus: filteredOrderMenus }));
+      //// เมื่อ กดปุ่ม - //////
+    } else if (e.target.value === "minus") {
+      if (
+        targetOrderIndex !== -1 &&
+        newOrderMenus[targetOrderIndex].amounts > 1
+      ) {
+        newOrderMenus[targetOrderIndex].amounts =
+          +newOrderMenus[targetOrderIndex].amounts - 1;
       } else {
-        // ไม่เท่ากับเมนูที่ถูกเลือก
-        const removedOrderMenus = newOrderMenus.filter(
-          (el) => el.menuId !== menuId
-        );
-        setOrder((prev) => ({ ...prev, orderMenus: removedOrderMenus }));
+        newOrderMenus.splice(targetOrderIndex, 1);
       }
     }
+    setOrder((prev) => ({ ...prev, orderMenus: newOrderMenus }));
   };
 
   const handleSubmit = async () => {
@@ -89,30 +129,27 @@ function OrderPage() {
       delete order.orderMenus.name;
       // console.log(order)
       await axios.post("/api/orders", order);
+      
       setOrder(defaultOrder);
-      //  console.log(order)
+      setSubmitStatus("SUBMIT_SUCCESS")
     } catch (error) {
       console.log(error);
     }
   };
-
 
   // สำรหับเช็ค total price เมื่อมีการ เเปลี่ยนแปลงของ menu ใน order
   useEffect(() => {
     // ถ้าใน order ไม่มี menu -> totalprice ก็คือ 0
     if (order.orderMenus.length === 0) setTotalPrice(0);
     else {
-      let newTotal = order.orderMenus.reduce(
-        (sum, item) => sum + item.price * item.amounts * 0.93,
-        0
-      )
-      setTotalPrice(newTotal)
+      let newTotal = order.orderMenus
+        .reduce((sum, item) => sum + item.price * item.amounts * 0.93, 0)
+        .toFixed(2);
+      setTotalPrice(newTotal);
       // console.log(newTotal)
     }
   }, [order.orderMenus]);
 
-
- 
   useEffect(() => {
     axios.get("/api/menus").then((res) => {
       setProducts(res.data.getAllMenu);
@@ -120,10 +157,20 @@ function OrderPage() {
     axios.get("/api/history").then((res) => {
       setViewOrder(res.data.getHistory);
     });
-    
   }, []);
-// console.log(viewOrder)
-  // console.log(order.orderType) // เริ่มต้นเป็น walkin
+
+  useEffect(() => {
+    if (submitStatus === "SUBMIT_SUCCESS") {
+      axios.get("/api/menus").then((res) => {
+        setProducts(res.data.getAllMenu);
+      });
+      axios.get("/api/history").then((res) => {
+        setViewOrder(res.data.getHistory);
+      });
+      setSubmitStatus("STAND_BY")
+    }
+  }, [submitStatus])
+
 
   return (
     <div className=" h-screen w-[calc(100vw-350px)]">
@@ -147,14 +194,16 @@ function OrderPage() {
         </div>
 
         <div className="col-span-4 bg-gray-300">
-          <h1 className="text-4xl font-bold mb-8 p-4">Order No. {viewOrder.length + 1}</h1>
+          <h1 className="text-4xl font-bold mb-8 p-4">
+            Order No. {viewOrder.length + 1}
+          </h1>
 
           {order.orderMenus.map((el) => (
             <OrderItem key={el.menuId} order={el} onClick={onClickAdd} />
           ))}
           {/* cal */}
 
-          <div className="bg-blue-100">
+          <div>
             <ul className="m-10 flex flex-col font-semibold">
               <li className="flex justify-between ">
                 Price &nbsp; &#40;BAHT&#41;{" "}
@@ -170,10 +219,12 @@ function OrderPage() {
                 Vat 7%{" "}
                 <span>
                   {order.orderMenus.length > 0 &&
-                    order.orderMenus.reduce(
-                      (sum, item) => sum + item.price * item.amounts * 0.07,
-                      0
-                    ).toFixed(2)}
+                    order.orderMenus
+                      .reduce(
+                        (sum, item) => sum + item.price * item.amounts * 0.07,
+                        0
+                      )
+                      .toFixed(2)}
                 </span>{" "}
               </li>
               <li className="flex justify-between">
@@ -188,12 +239,13 @@ function OrderPage() {
                 ></input>
               </li>
               <li className="flex justify-between">
-                Total Price &nbsp; &#40;BAHT&#41; {
-                  order.discount === "0" && <span>{totalPrice}</span>
-                }
-                {
-                  order.discount !== "0" && <span>{totalPrice*(100-parseInt(order.discount))/100}</span>
-                }
+                Total Price &nbsp; &#40;BAHT&#41;{" "}
+                {order.discount === "0" && <span>{totalPrice}</span>}
+                {order.discount !== "0" && (
+                  <span>
+                    {(totalPrice * (100 - parseInt(order.discount))) / 100}
+                  </span>
+                )}
               </li>
             </ul>
           </div>
@@ -203,21 +255,25 @@ function OrderPage() {
             <p className="font-bold text-xl">Order Type</p>
             <div className="flex justify-center mt-3">
               <div
-                className="p-2 border  border-black bg-blue-500 hover:bg-blue-900 cursor-pointer text-white font-bold"
+                className={`p-3 border border-black ${
+                  order.orderType === "WALKIN" ? "bg-red-700" : "bg-gray-500"
+                } hover:bg-red-700 cursor-pointer text-white font-bold`}
                 name="WALKIN"
                 value={order.orderType}
                 onClick={() => setOrder({ ...order, orderType: "WALKIN" })}
               >
-                WALI IN
+                WALK IN
               </div>
 
               <div
-                className="p-2 border border-black bg-gray-500 hover:bg-gray-900 cursor-pointer text-white font-bold"
+                className={`p-3 border border-black ${
+                  order.orderType === "DELIVERY" ? "bg-red-700" : "bg-gray-500"
+                } hover:bg-red-700 cursor-pointer text-white font-bold`}
                 name="DELIVERY"
                 value={order.orderType}
                 onClick={() => setOrder({ ...order, orderType: "DELIVERY" })}
               >
-                Delivery
+                DELIVERY
               </div>
             </div>
           </div>
@@ -226,7 +282,7 @@ function OrderPage() {
             <p className="font-bold text-xl">Payment Type</p>
             <div className="flex justify-center mt-3">
               <div
-                className="p-2 border  border-black bg-blue-500 hover:bg-blue-900 cursor-pointer text-white font-bold"
+                className={`p-3 border  border-black ${order.paymentType ==="CASH"? "bg-red-700" : "bg-gray-500"} hover:bg-red-700 cursor-pointer text-white font-bold`}
                 name="CASH"
                 value={order.paymentType}
                 onClick={() => setOrder({ ...order, paymentType: "CASH" })}
@@ -234,7 +290,7 @@ function OrderPage() {
                 CASH
               </div>
               <div
-                className="p-2 border border-black bg-gray-500 hover:bg-gray-900 cursor-pointer text-white font-bold"
+                className={`p-3 border border-black ${order.paymentType==="QRCODE" ?"bg-red-700":"bg-gray-500"} hover:bg-red-700 cursor-pointer text-white font-bold`}
                 name="QRCODE"
                 value={order.paymentType}
                 onClick={() => setOrder({ ...order, paymentType: "QRCODE" })}
@@ -244,9 +300,9 @@ function OrderPage() {
             </div>
           </div>
 
-          <div className="bg-red-200 flex justify-end pr-20">
+          <div className="flex justify-end pr-20">
             <button
-              className="border border-black rounded-3xl p-2 px-7 bg-blue-500 text-white"
+              className="border border-black rounded-3xl p-2 px-7 bg-blue-500 text-white font-bold text-xl"
               onClick={handleSubmit}
             >
               Confirm

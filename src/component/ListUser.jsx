@@ -13,7 +13,7 @@ function ListUser({user ,setAllUsers,allUsers}) {
         <div>{user.role}</div>
         <div>{user.status}</div>
 
-        <ButtonUser userId={user.id} />
+        <ButtonUser userId={user.id} setAllUsers={setAllUsers} allUsers={allUsers}/>
 
       </div>
     </div>
