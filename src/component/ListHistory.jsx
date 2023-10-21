@@ -13,13 +13,11 @@ function ListHistory({history}) {
   const [loadind,setLoading] = useState(false)
 
   const handleVoidOrder = async (e) => {
- 
       try {
-       
            setLoading(true)
     await axios.patch(`/api/orders/${history.id}`)
     .then(res => {
-        
+      
     })  
     } catch (error) {
       console.log(error)

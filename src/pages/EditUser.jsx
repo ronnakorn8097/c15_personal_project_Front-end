@@ -9,7 +9,7 @@ import Loading from "../component/Loading";
 
 function EditUser() {
   const { userId } = useParams();
-  console.log(userId);
+  // console.log(userId);
 
   const navigate = useNavigate();
 
@@ -30,6 +30,8 @@ function EditUser() {
   useEffect(() => {
       try {
         axios.get(`/api/users/${userId}`).then((res) => {
+          // ตอนเอาค่ามา ไม่ได้ส่ง password มา มันเลย error ที console log
+          // กำหนดค่า password = "" ให้มันหายแดง
           res.data.getUserById.password = "";
           setEditUser(res.data.getUserById);
         });
