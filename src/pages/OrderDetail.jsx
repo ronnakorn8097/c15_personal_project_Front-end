@@ -1,12 +1,20 @@
 import axios from "axios";
-import React from "react";
+import React,{useRef} from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import {useReactToPrint} from 'react-to-print'
 
 function OrderDetail() {
   const { orderId } = useParams();
   const [order, setOrder] = useState(null);
+
+  const componentRef = useRef();
+  const printData = useReactToPrint({
+      content : ()=> componentRef.current,
+      documentTitle : `Detail Item`,
+      onafterprint : ()=> alert('print success')
+  })
 
   useEffect(() => {
     axios
@@ -23,7 +31,7 @@ function OrderDetail() {
   if (!order) return <div>Loading...</div>;
   else
     return (
-      <div className="flex">
+      <div className="flex" ref={componentRef}>
         {/* <NavBar /> */}
         <div className="w-full overflow-auto">
           <div className="mx-32 mt-9 mb-9">
@@ -52,30 +60,31 @@ function OrderDetail() {
               </ul>
             </div>
             <hr />
-            <h1>Menu Detail</h1>
+            <h1 className="text-xl font-bold">Menu Detail</h1>
             <div className="w-full ">
+        
+
               {order.orderMenus.map((orderMenu) => {
                 return (
                   <React.Fragment key={orderMenu.id}>
-                    <ul className="grid grid-cols-6 font-bold text-lg mt-8">
+                    <ul className="w-full flex justify-around font-bold text-lg mt-8">
                       <li>
                         <img
                           alt={`img-${orderMenu.id}`}
                           src={orderMenu.menus.menuImage}
+                          className="w-24"
                         />
                       </li>
-                      <li>{orderMenu.menus.name}</li>
-                      <li>{orderMenu.amounts}</li>
-                      <li>{orderMenu.menus.price}</li>
-                      <li>{orderMenu.menus.price * orderMenu.amounts}</li>
+                      <li className="flex items-center justify-center">{orderMenu.menus.name}</li>
+                      <li className="flex items-center justify-center">{orderMenu.amounts}</li>
+                      <li className="flex items-center justify-center">{orderMenu.menus.price}</li>
+                      <li className="flex items-center justify-center">{orderMenu.menus.price * orderMenu.amounts}</li>
                     </ul>
                   </React.Fragment>
                 );
               })}
-              <ul className="grid grid-cols-6 font-bold text-lg mt-8">
-                <li> Total Price </li>
-                <li> - </li>
-                <li> - </li>
+              <ul className="flex gap-6 font-bold text-lg mt-8">
+                <li>Price </li>
                 <li>
                   {order.orderMenus.reduce(
                     (sum, item) => sum + item.menus.price * item.amounts,
@@ -83,10 +92,14 @@ function OrderDetail() {
                   )}
                 </li>
               </ul>
-              <ul className="grid grid-cols-6 font-bold text-lg mt-8">
+              <ul className="flex gap-6 font-bold text-lg mt-8">
                 <li> Discount </li>
-                <li> - </li>
-                <li> - </li>
+                <li>
+                {order.discount}%
+                </li>
+              </ul>
+              <ul className=" flex gap-6 font-bold text-lg mt-8">
+                <li> Total Price </li>        
                 <li>
                   {order.orderMenus.reduce(
                     (sum, item) => sum + item.menus.price * item.amounts,
@@ -95,8 +108,10 @@ function OrderDetail() {
                 </li>
               </ul>
             </div>
+        <button onClick={printData} className="mt-12 w-24 rounded-md text-white bg-gray-700 font-bold print:hidden">Print</button>
           </div>
         </div>
+       
       </div>
     );
 }

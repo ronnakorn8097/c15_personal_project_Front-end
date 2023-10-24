@@ -78,7 +78,9 @@ const staffRouter = createBrowserRouter([
         { path: "history", element: <History /> },
         // order
         { path: "order", element: <OrderPage /> },
-        {path:"*",element: <OrderPage />}
+        {path:"*",element: <OrderPage />},
+         //detail
+      { path: "order/detail/:orderId", element: <OrderDetail /> },
       ],
     },
   ]);

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Loading from "./Loading";
 
+
 function VoidButton({historyItem,history,setHistory}) {
 
 
@@ -44,7 +45,7 @@ function VoidButton({historyItem,history,setHistory}) {
           className="px-2 py-2.5 text-sm font-medium text-white bg-red-500">
           VOID
         </button> 
-
+        </>}
         <Link to={`/order/detail/${historyItem}`}>
         <button
           type="button"
@@ -53,12 +54,8 @@ function VoidButton({historyItem,history,setHistory}) {
         </button>
         </Link>
 
-        </>}
-        <button
-          type="button"
-          className="px-2 py-2.5 text-sm font-medium text-white bg-green-700">
-          Print
-        </button>
+       
+     
       
 
   </div>

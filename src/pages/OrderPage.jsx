@@ -87,17 +87,29 @@ function OrderPage() {
 
   //// เมื่อ กดปุ่ม + //////
   const onClickAdd = (e, menuId) => {
+    // clone array ตัวเก่า
     const newOrderMenus = [...order.orderMenus];
-
+    // หา index ที่ menuId === e.menuId 
     const targetOrderIndex = newOrderMenus.findIndex(
       (el) => +el.menuId === +menuId
     );
-    console.log(targetOrderIndex);
+    
+    //ถ้า กด + ตอนแรกจะได้ค่า -1 เพราะยังไม่มี menuId ใน newOrderMenus
+    // ถ้าเคยกดไปแล้ว แล้วกด + จะได้ค่าของ index ที่กด เช่น กด index[0] ก็ได้จะได้ตแหน่งที่ index[0]
+    // console.log(targetOrderIndex);
+
+    // ถ้ากดปุ่ม +
     if (e.target.value === "plus") {
+      // แล้ว ไม่เท่ากับ -1 หมายความว่า มี menuId อยู่ใน targetOrderIndex
       if (targetOrderIndex !== -1) {
+        // เข้าถึง index[] ตำแหน่งนั้น ที่มี key ชื่อว่า amount 
+        // จากนั้น เพิ่ม key ที่ชื่อ amount ให้ +1
         newOrderMenus[targetOrderIndex].amounts =
           +newOrderMenus[targetOrderIndex].amounts + 1;
       } else {
+
+        // แต่ถ้าหาแล้ว ไม่เคยมี
+        // ก็เช็คว่ามี menuId ใน targetProduct ไหม แล้ว add object ให้มัน
         const targetProduct = products.find((el) => el.id === menuId);
         if (targetProduct) {
           const newOrder = {
@@ -112,15 +124,18 @@ function OrderPage() {
       //// เมื่อ กดปุ่ม - //////
     } else if (e.target.value === "minus") {
       if (
+        // เคยกดไปแล้ว และมี amount มากกว่า 1 ก็ให้มัน -1
         targetOrderIndex !== -1 &&
         newOrderMenus[targetOrderIndex].amounts > 1
       ) {
         newOrderMenus[targetOrderIndex].amounts =
           +newOrderMenus[targetOrderIndex].amounts - 1;
       } else {
+        // ในกรณี amount < 1 ก็ให้มัน ลบ targetOrderIndex หรือก็คือ menuId ที่เรากด ให้ออกจากหน้า ไป 1 ตัว
         newOrderMenus.splice(targetOrderIndex, 1);
       }
     }
+    // set ค่า state ให้มัน
     setOrder((prev) => ({ ...prev, orderMenus: newOrderMenus }));
   };
 
